@@ -1,0 +1,14 @@
+mixin btcChecked()
+    .form-check
+        input#btcRadio.form-check-input(type='radio', value='btc', name='radioCrypto', checked='')
+        label.form-check-label(for='btcRadio') BTC
+    .form-check
+        input#ethRadio.form-check-input(type='radio', value='eth', name='radioCrypto')
+        label.form-check-label(for='ethRadio') ETH
+mixin ethChecked()
+    .form-check
+        input#btcRadio.form-check-input(type='radio', value='btc', name='radioCrypto')
+        label.form-check-label(for='btcRadio') BTC
+    .form-check
+        input#ethRadio.form-check-input(type='radio', value='eth', name='radioCrypto', checked='')
+        label.form-check-label(for='ethRadio') ETH

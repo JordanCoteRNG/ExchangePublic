@@ -1,0 +1,72 @@
+include ./mixin/header
+include ./mixin/radioCrypto
+
+doctype html
+html(lang='en', data-bs-theme='dark')
+    head
+        meta(charset='utf-8')
+        title MFA
+        meta(content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no', name='viewport')
+        link(rel='icon', type='image/x-icon', href='img/favicon.ico')
+        link(href='assets/plugins/@fortawesome/fontawesome-free/css/all.min.css', rel='stylesheet')
+        link(href='assets/plugins/bootstrap-icons/font/bootstrap-icons.css', rel='stylesheet')
+        link(href='assets/plugins/jquery-ui-dist/jquery-ui.min.css', rel='stylesheet')
+        link(href='assets/plugins/animate.css/animate.min.css', rel='stylesheet')
+        link(href='assets/plugins/pace-js/themes/black/pace-theme-flash.css', rel='stylesheet')
+        link(href='assets/plugins/perfect-scrollbar/css/perfect-scrollbar.css', rel='stylesheet')
+        link(href='assets/plugins/jvectormap-next/jquery-jvectormap.css', rel='stylesheet')
+        link(href='assets/css/app.min.css', rel='stylesheet')
+        link(href='css/home.css', rel='stylesheet')
+    body.theme-red
+        #app.app.app-sidebar-collapsed.app-footer-fixed
+            if hasHeader
+                +header()
+            #content.app.app-content
+                .register
+                    .register-content
+                        form(action='/checkMFA', method='POST', name='checkMFA_form')
+                            h1.text-center Vérification MFA
+                            p.text-inverse.text-opacity-50.text-center ENTRER LE(S) CODE(S) REÇU POUR CONTINUER.
+                            if error != ""
+                                br
+                                .alert.alert-danger!=error
+                                br
+                            if success != ""
+                                br
+                                .alert.alert-success!=success
+                                br
+                            if emailMFA
+                                .mb-3
+                                    label.form-label
+                                        | Code MFA Courriel
+                                        span.text-danger *
+                                    input.form-control.form-control-lg.bg-inverse.bg-opacity-5.text-center(type='text', name='emailMFA', placeholder="420696", value='')
+                            if phoneMFA
+                                .mb-3
+                                    label.form-label
+                                        | Code MFA SMS
+                                        span.text-danger *
+                                    input.form-control.form-control-lg.bg-inverse.bg-opacity-5.text-center(type='text', name='phoneMFA', placeholder="420696", value='')
+                            if authMFA
+                                .mb-3
+                                    label.form-label
+                                        | Code MFA Authenticator
+                                        span.text-danger *
+                                    input.form-control.form-control-lg.bg-inverse.bg-opacity-5.text-center(type='text', name='authMFA', placeholder="420696", value='')
+                            .mb-3
+                                button.btn.btn-outline-theme.btn-lg.d-block.w-100(name='submit', type='submit') Envoyer
+            a.btn-scroll-top.fade(href='#', data-toggle='scroll-to-top')
+                i.fa.fa-arrow-up
+            #footer.app-footer
+                p @ 2023 Cryptova, tous droits réservés
+        script(src='assets/plugins/pace-js/pace.min.js')
+        script(src='assets/plugins/jquery/dist/jquery.min.js')
+        script(src='assets/plugins/jquery-ui-dist/jquery-ui.min.js')
+        script(src='assets/plugins/bootstrap/dist/js/bootstrap.bundle.min.js')
+        script(src='assets/plugins/perfect-scrollbar/dist/perfect-scrollbar.min.js')
+        script(src='assets/plugins/js-cookie/dist/js.cookie.min.js')
+        script(src='assets/plugins/jvectormap-next/jquery-jvectormap.min.js')
+        script(src='assets/plugins/jvectormap-content/world-mill.js')
+        script(src='assets/plugins/chart.js/dist/chart.umd.js')
+        script(src='assets/plugins/apexcharts/dist/apexcharts.min.js')
+        script(src='assets/js/app.min.js')

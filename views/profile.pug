@@ -1,0 +1,154 @@
+include ./mixin/header
+
+doctype html
+html(lang='en', data-bs-theme='dark')
+    head
+        meta(charset='utf-8')
+        title Profile
+        meta(content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no', name='viewport')
+        link(rel='icon', type='image/x-icon', href='img/favicon.ico')
+        link(href='assets/plugins/@fortawesome/fontawesome-free/css/all.min.css', rel='stylesheet')
+        link(href='assets/plugins/bootstrap-icons/font/bootstrap-icons.css', rel='stylesheet')
+        link(href='assets/plugins/jquery-ui-dist/jquery-ui.min.css', rel='stylesheet')
+        link(href='assets/plugins/animate.css/animate.min.css', rel='stylesheet')
+        link(href='assets/plugins/pace-js/themes/black/pace-theme-flash.css', rel='stylesheet')
+        link(href='assets/plugins/perfect-scrollbar/css/perfect-scrollbar.css', rel='stylesheet')
+        link(href='assets/plugins/jvectormap-next/jquery-jvectormap.css', rel='stylesheet')
+        link(href='assets/css/app.min.css', rel='stylesheet')
+        link(href='css/home.css', rel='stylesheet')
+    body.theme-red
+        #app.app.app-sidebar-collapsed.app-footer-fixed
+            +header()
+            #content.app.app-content
+                if error != ""
+                    .row
+                        .mb-3
+                            br
+                            .alert.alert-danger.text-center!=error
+                            br
+                if success != ""
+                    .row
+                        .mb-3
+                            br
+                            .alert.alert-success.text-center!=success
+                            br
+                .row
+                    .col-xl-6.col-lg-6
+                        .card.d-flex.h-100
+                            .card-body
+                                .mb-3
+                                    h5.card-title Modification Profile
+                                form(action='/profile/update/account-info', method='POST', name='update_profile_form')
+                                    .mb-3
+                                        label.form-label
+                                            | Nom d'utilisateur
+                                        input.form-control.form-control-lg.bg-inverse.bg-opacity-5(type='text', name='username', placeholder="Nom d'utilisateur", value=username)
+                                    .mb-3
+                                        label.form-label
+                                            | Email
+                                        input.form-control.form-control-lg.bg-inverse.bg-opacity-5(name='email', type='text', placeholder='exemple@exemple.com', value=email)
+                                    .mb-3
+                                        label.form-label
+                                            | Numéro de Téléphone
+                                        input.form-control.form-control-lg.bg-inverse.bg-opacity-5(name='phoneNumber', type='text', placeholder='4504441919', value=phoneNumber)
+                                    .mb-3
+                                        label.form-label(for='passwordInput')
+                                            | Mot de passe
+                                        input#passwordInput.form-control.form-control-lg.bg-inverse.bg-opacity-5.passwordField(name='password', type='password', value='', placeholder='Mot de passe')
+                                    .mb-3
+                                        label.form-label(for='checkPasswordInput')
+                                            | Confirmer mot de passe
+                                        input#checkPasswordInput.form-control.form-control-lg.bg-inverse.bg-opacity-5.passwordField(name='confirmPassword', type='password', value='', placeholder='Mot de passe')
+                                    .mb-3
+                                        .form-check
+                                            input.form-check-input(type='checkbox', value='', onclick='swapPasswordView()')
+                                            label.form-check-label() Voir les mots de passes
+                                    .mb-3
+                                        button.btn.btn-outline-theme.btn-lg.d-block.w-100(name='submit', type='submit') Appliquer
+                            .card-arrow
+                                .card-arrow-top-left
+                                .card-arrow-top-right
+                                .card-arrow-bottom-left
+                                .card-arrow-bottom-right
+                    .col-xl-6.col-lg-6
+                        .card.d-flex.h-100
+                            .card-body
+                                h5.card-title Gestion MFA
+                                ul.nav.nav-tabs.nav-tabs-v2.ps-4.pe-4
+                                    li.nav-item.me-3
+                                        a.nav-link.active(href="#emailMFA", data-bs-toggle="tab") Courriel
+                                    li.nav-item.me-3
+                                        a.nav-link(href="#phoneMFA", data-bs-toggle="tab") Téléphone
+                                    li.nav-item.me-3
+                                        a.nav-link(href="#authMFA", data-bs-toggle="tab") Authenticateur
+                                .tab-content.p-4
+                                    #emailMFA.tab-pane.fade.show.active
+                                        .mb-3
+                                            .card.d-flex.h-100
+                                                .card-body
+                                                    if emailMFA
+                                                        h5.card-title Vous avez activé l'authentication par courriel.
+                                                        a.btn.btn-outline-theme.btn-lg.d-block.w-100.fw-500.mb-3a(href='/setupMFA/email') Désactiver
+                                                    else
+                                                        h5.card-title Vous n'avez pas activé l'authentication par courriel.
+                                                        a.btn.btn-outline-theme.btn-lg.d-block.w-100.fw-500.mb-3a(href='/setupMFA/email') Activer
+                                                .card-arrow
+                                                    .card-arrow-top-left
+                                                    .card-arrow-top-right
+                                                    .card-arrow-bottom-left
+                                                    .card-arrow-bottom-right
+                                    #phoneMFA.tab-pane.fade
+                                        .mb-3
+                                            .card.d-flex.h-100
+                                                .card-body
+                                                    if phoneMFA
+                                                        h5.card-title Vous avez activé l'authentication par téléphone.
+                                                        a.btn.btn-outline-theme.btn-lg.d-block.w-100.fw-500.mb-3a(href='/setupMFA/phone') Désactiver
+                                                    else
+                                                        h5.card-title Vous n'avez pas activé l'authentication par téléphone.
+                                                        a.btn.btn-outline-theme.btn-lg.d-block.w-100.fw-500.mb-3a(href='/setupMFA/phone') Activer
+                                                .card-arrow
+                                                    .card-arrow-top-left
+                                                    .card-arrow-top-right
+                                                    .card-arrow-bottom-left
+                                                    .card-arrow-bottom-right
+                                    #authMFA.tab-pane.fade
+                                        .mb-3
+                                            .card.d-flex.h-100
+                                                .card-body
+                                                    if authMFA
+                                                        h5.card-title Vous avez activé l'authentication par authenticateur.
+                                                        a.btn.btn-outline-theme.btn-lg.d-block.w-100.fw-500.mb-3a(href='/setupMFA/auth') Désactiver
+                                                    else
+                                                        h5.card-title Vous n'avez pas activé l'authentication par autheticateur.
+                                                        a.btn.btn-outline-theme.btn-lg.d-block.w-100.fw-500.mb-3a(href='/setupMFA/auth') Activer
+                                                .card-arrow
+                                                    .card-arrow-top-left
+                                                    .card-arrow-top-right
+                                                    .card-arrow-bottom-left
+                                                    .card-arrow-bottom-right
+                            .card-arrow
+                                .card-arrow-top-left
+                                .card-arrow-top-right
+                                .card-arrow-bottom-left
+                                .card-arrow-bottom-right
+
+
+            a.btn-scroll-top.fade(href='#', data-toggle='scroll-to-top')
+                i.fa.fa-arrow-up
+
+            #footer.app-footer
+                p @ 2023 Cryptova, tous droits réservés
+
+        script(src='assets/plugins/pace-js/pace.min.js')
+        script(src='assets/plugins/jquery/dist/jquery.min.js')
+        script(src='assets/plugins/jquery-ui-dist/jquery-ui.min.js')
+        script(src='assets/plugins/bootstrap/dist/js/bootstrap.bundle.min.js')
+        script(src='assets/plugins/perfect-scrollbar/dist/perfect-scrollbar.min.js')
+        script(src='assets/plugins/js-cookie/dist/js.cookie.min.js')
+        script(src='assets/plugins/jvectormap-next/jquery-jvectormap.min.js')
+        script(src='assets/plugins/jvectormap-content/world-mill.js')
+        script(src='assets/plugins/chart.js/dist/chart.umd.js')
+        script(src='assets/plugins/apexcharts/dist/apexcharts.min.js')
+        script(src='assets/js/app.min.js')
+        script(src='js/passwordField.js')

@@ -1,0 +1,30 @@
+version: '3'
+services:
+  node:
+    build:
+      context: .
+      dockerfile: "./docker/nodejs/Dockerfile"
+    container_name: "cryptova_webserver"
+    restart: 'always'
+    ports:
+      - '80:3000'
+    volumes:
+      - ./:/app
+    external_links:
+      - mongo
+
+  mongo:
+    container_name: mongo
+    image: mongo
+    volumes:
+      - ./data:/data/db
+    ports:
+      - '27017:27017'
+
+  mongo-express:
+    container_name: mongo-express
+    image: mongo-express
+    ports:
+    - '8083:8081'
+
+

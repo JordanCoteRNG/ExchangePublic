@@ -1,0 +1,63 @@
+mixin header()
+    header#header.app-header
+        .brand
+            a.brand-logo(href='/home')
+                span.brand-img
+                    span.brand-img-text.text-theme H
+                span.brand-text CRYPTOVA
+        .menu
+            .menu-item.dropdown.dropdown-mobile-full
+                a.menu-link(href='#', data-bs-toggle='dropdown', data-bs-display='static')
+                    .menu-img.online
+                        img(src='assets/img/icons/bitcoin.png', alt='BTC', height='60')
+                    .menu-text.d-sm-block.d-none.w-170px #{btcAmount} BTC
+                .dropdown-menu.dropdown-menu-end.me-lg-3.fs-11px.mt-1
+                    .dropdown-divider
+                    a.dropdown-item.d-flex.align-items-center(href='/buyCrypto/btc')
+                        | ACHAT
+                        i.bi.bi-cart.ms-auto.text-theme.fs-16px.my-n1
+                    a.dropdown-item.d-flex.align-items-center(href='/sell/btc')
+                        | VENTE
+                        i.bi.bi-cash-stack.ms-auto.text-theme.fs-16px.my-n1
+                    a.dropdown-item.d-flex.align-items-center(href='/transfer/btc')
+                        | TRANSFERT
+                        i.bi.bi-envelope-paper.ms-auto.text-theme.fs-16px.my-n1
+            .menu-item.dropdown.dropdown-mobile-full
+                a.menu-link(href='#', data-bs-toggle='dropdown', data-bs-display='static')
+                    .menu-img.online
+                        img(src='assets/img/icons/ethereum.png', alt='ETH', height='60')
+                    .menu-text.d-sm-block.d-none.w-170px #{ethAmount} ETH
+                .dropdown-menu.dropdown-menu-end.me-lg-3.fs-11px.mt-1
+                    .dropdown-divider
+                    a.dropdown-item.d-flex.align-items-center(href='/buyCrypto/eth')
+                        | ACHAT
+                        i.bi.bi-cart.ms-auto.text-theme.fs-16px.my-n1
+                    a.dropdown-item.d-flex.align-items-center(href='/sell/eth')
+                        | VENTE
+                        i.bi.bi-cash-stack.ms-auto.text-theme.fs-16px.my-n1
+                    a.dropdown-item.d-flex.align-items-center(href='/transfer/eth')
+                        | TRANSFERT
+                        i.bi.bi-envelope-paper.ms-auto.text-theme.fs-16px.my-n1
+            .menu-item.dropdown.dropdown-mobile-full
+                a.menu-link(href='#', data-bs-toggle='dropdown', data-bs-display='static')
+                    .menu-img.online
+                        img(src='assets/img/icons/money.png', alt='Profile', height='60')
+                    .menu-text.d-sm-block.d-none.w-170px #{fiatsAmount} $CAD FIATS
+                .dropdown-menu.dropdown-menu-end.me-lg-3.fs-11px.mt-1
+                    .dropdown-divider
+                    a.dropdown-item.d-flex.align-items-center(href='/buy')
+                        | ACHAT
+                        i.bi.bi-cart.ms-auto.text-theme.fs-16px.my-n1
+            .menu-item.dropdown.dropdown-mobile-full
+                a.menu-link(href='#', data-bs-toggle='dropdown', data-bs-display='static')
+                    .menu-img.online
+                        img(src='assets/img/icons/profile.png', alt='Profile', height='60')
+                    .menu-text.d-sm-block.d-none.w-170px=username
+                .dropdown-menu.dropdown-menu-end.me-lg-3.fs-11px.mt-1
+                    .dropdown-divider
+                    a.dropdown-item.d-flex.align-items-center(href='/profile')
+                        | PROFILE
+                        i.bi.bi-person-lines-fill.ms-auto.text-theme.fs-16px.my-n1
+                    a.dropdown-item.d-flex.align-items-center(href='/logout')
+                        | LOGOUT
+                        i.bi.bi-toggle-off.ms-auto.text-theme.fs-16px.my-n1

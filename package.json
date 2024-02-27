@@ -1,0 +1,33 @@
+{
+  "name": "exchangetp1",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "export NODE_OPTIONS=--openssl-legacy-provider; node ./bin/www",
+    "watch": "export NODE_OPTIONS=--openssl-legacy-provider; nodemon ./bin/www"
+  },
+  "dependencies": {
+    "@sendgrid/mail": "^7.7.0",
+    "axios": "^1.5.1",
+    "bitcore-lib": "^10.0.11",
+    "bitcore-mnemonic": "^10.0.11",
+    "connect-flash": "^0.1.1",
+    "cookie-parser": "~1.4.4",
+    "crypto-convert": "^2.1.6",
+    "debug": "~2.6.9",
+    "express": "~4.16.1",
+    "express-session": "^1.17.3",
+    "express-validator": "^7.0.1",
+    "http-errors": "~1.6.3",
+    "mongoose": "^7.6.3",
+    "morgan": "~1.9.1",
+    "node-fetch": "^3.3.2",
+    "pug": "2.0.0-beta11",
+    "qrcode": "^1.5.3",
+    "speakeasy": "^2.0.0",
+    "twilio": "^4.19.0",
+    "validator": "^13.11.0",
+    "web3": "^1.8.0",
+    "web3-eth-accounts": "^4.1.0"
+  }
+}

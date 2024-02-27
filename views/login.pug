@@ -1,0 +1,46 @@
+doctype html
+html(lang='en', data-bs-theme='dark')
+    head
+        meta(charset='UTF-8')
+        meta(name='viewport', content='width=device-width, initial-scale=1.0')
+        meta(http-equiv='X-UA-Compatible', content='ie=edge')
+        title=title
+        link(rel='icon', type='image/x-icon', href='images/favicon.ico')
+        link(href='assets/css/vendor.min.css', rel='stylesheet')
+        link(href='assets/css/app.min.css', rel='stylesheet')
+        script(src='assets/js/vendor.min.js')
+        script(src='assets/js/app.min.js')
+    body.theme-red
+        #app.app.app-full-height.app-without-header
+            .login
+                .login-content
+                    h1.text-center CRYPTOVA
+                    form(action='/login', method='POST', name='login_form')
+                        h1.text-center IDENTIFICATION
+                        .text-inverse.text-opacity-50.text-center.mb-4
+                            | Veuillez-vous identifier, agents.
+                        if error != ""
+                            br
+                            .alert.alert-danger!=error
+                            br
+
+                        if success != ""
+                            br
+                            .alert.alert-success!=success
+                            br
+                        .mb-3
+                            label.form-label
+                                | Email
+                                span.text-danger *
+                            input#username.form-control.form-control-lg.bg-inverse.bg-opacity-5(type='text', value='', placeholder="exemple@exemple.com", name='email')
+                        .mb-3
+                            .d-flex
+                                label.form-label
+                                    | Mot de passe
+                                    span.text-danger *
+                            input#password.form-control.form-control-lg.bg-inverse.bg-opacity-5(type='password', value='', placeholder='Mot de passe', name='password')
+                        button.btn.btn-outline-theme.btn-lg.d-block.w-100.fw-500.mb-3(type='submit', name='submit') Connexion
+                        .text-center.text-inverse.text-opacity-50
+                            | Pas encore de compte?
+                            a(href='/register') Crée un compte
+                            | .
